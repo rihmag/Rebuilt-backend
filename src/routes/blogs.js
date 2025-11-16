@@ -2,6 +2,7 @@ import express from 'express'
 import Blog from '../models/Blog.js'
 import Category from '../models/Category.js'
 import upload, {cloudinary} from '../middleware/cloudinaryUpload.js'
+import isAuthenticated from '../middleware/authmiddleware.js'
 
 const router = express.Router()
 
@@ -54,7 +55,7 @@ router.get('/:id', async (req, res) => {
 	}
 })
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/',isAuthenticated, upload.single('image'), async (req, res) => {
 	try {
 		const {categoryId, title, description, author, date} = req.body
 
@@ -111,7 +112,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 	}
 })
 
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', isAuthenticated,upload.single('image'), async (req, res) => {
 	try {
 		const {id} = req.params
 		const {categoryId, title, description, author, date} = req.body
@@ -180,7 +181,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 	}
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 

@@ -41,10 +41,31 @@ export default function AdminPanel() {
 		blogId: null,
 		blogTitle: '',
 	})
+	const [role, setRole] = useState('')
 
 	useEffect(() => {
-		fetchCategories()
+		const userRole = localStorage.getItem('role')
+		setRole(userRole)
 	}, [])
+
+	useEffect(() => {
+		if (role === 'maalik') {
+			fetchCategories()
+		}
+	}, [role])
+
+	if (role !== 'maalik') {
+		return (
+			<div className='flex items-center justify-center min-h-screen bg-gray-50'>
+				<div className='text-center'>
+					<h1 className='text-3xl font-bold text-red-600'>Access Denied</h1>
+					<p className='mt-2 text-gray-600'>
+						You are not authorized to view this page.
+					</p>
+				</div>
+			</div>
+		)
+	}
 
 	async function fetchCategories() {
 		try {

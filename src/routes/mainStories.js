@@ -1,7 +1,7 @@
 import express from 'express'
 import MainStory from '../models/MainStory.js'
 import Blog from '../models/Blog.js'
-
+import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all main stories
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 })
 
 // Add blog to main stories
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated,async (req, res) => {
 	try {
 		const {blogId} = req.body
 
@@ -58,7 +58,7 @@ router.post('/', async (req, res) => {
 })
 
 // Remove blog from main stories
-router.delete('/:blogId', async (req, res) => {
+router.delete('/:blogId',isAuthenticated, async (req, res) => {
 	try {
 		const {blogId} = req.params
 

@@ -1,7 +1,7 @@
 import express from 'express'
 import TrendingStory from '../models/TrendingStory.js'
 import Blog from '../models/Blog.js'
-
+import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all trending stories
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 })
 
 // Add blog to trending stories
-router.post('/', async (req, res) => {
+router.post('/',isAuthenticated, async (req, res) => {
 	try {
 		const {blogId} = req.body
 
@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
 })
 
 // Remove blog from trending stories
-router.delete('/:blogId', async (req, res) => {
+router.delete('/:blogId', isAuthenticated,async (req, res) => {
 	try {
 		const {blogId} = req.params
 

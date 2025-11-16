@@ -1,7 +1,7 @@
 import express from 'express'
 import NewsCarousel from '../models/NewsCarousel.js'
 import upload, {cloudinary} from '../middleware/cloudinaryUpload.js'
-
+import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all news carousel items
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 })
 
 // Create a new news carousel item
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/',isAuthenticated,upload.single('image'), async (req, res) => {
 	try {
 		const {headline} = req.body
 
@@ -53,7 +53,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 })
 
 // Delete a news carousel item
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 

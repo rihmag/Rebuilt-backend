@@ -7,7 +7,8 @@ import blogsRouter from './routes/blogs.js'
 import mainStoriesRouter from './routes/mainStories.js'
 import trendingStoriesRouter from './routes/trendingStories.js'
 import newsCarouselRouter from './routes/newsCarousel.js'
-
+import authRouter from "./routes/authroutes.js"
+import pagevisitRouter from "./routes/pagevisitcontroller.js"
 const app = express()
 
 // CORS configuration for production
@@ -29,7 +30,8 @@ app.use('/api/blogs', blogsRouter)
 app.use('/api/main-stories', mainStoriesRouter)
 app.use('/api/trending-stories', trendingStoriesRouter)
 app.use('/api/news-carousel', newsCarouselRouter)
-
+app.use("/api/auth",authRouter)
+app.use("/api/analytics",pagevisitRouter)
 mongoose
 	.connect(ENV.MONGODB_URI)
 	.then(() => {

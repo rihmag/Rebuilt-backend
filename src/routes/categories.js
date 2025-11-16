@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import slugify from 'slugify'
 import Category from '../models/Category.js'
+import isAuthenticated from '../middleware/authmiddleware.js'
 
 const router = Router()
 
@@ -8,7 +9,7 @@ function makeSlug(name) {
 	return slugify(name, {lower: true, strict: true, trim: true})
 }
 
-router.get('/', async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
 	try {
 		const items = await Category.find({isActive: true}).sort({name: 1}).lean()
 		res.json({
@@ -24,7 +25,7 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.post('/', async (req, res) => {
+router.post('/',isAuthenticated, async (req, res) => {
 	try {
 		let {name} = req.body || {}
 		if (typeof name !== 'string') {
@@ -65,7 +66,7 @@ router.post('/', async (req, res) => {
 	}
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAuthenticated,async (req, res) => {
 	try {
 		const {id} = req.params
 		const doc = await Category.findByIdAndDelete(id)
