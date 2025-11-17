@@ -66,7 +66,7 @@ router.post('/createcategory',isAuthenticated, async (req, res) => {
 	}
 })
 
-router.delete('/:id', isAuthenticated,async (req, res) => {
+router.delete('/deletecategoryid/:id', isAuthenticated,async (req, res) => {
 	try {
 		const {id} = req.params
 		const doc = await Category.findByIdAndDelete(id)
