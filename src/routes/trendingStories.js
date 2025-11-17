@@ -5,7 +5,7 @@ import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all trending stories
-router.get('/', async (req, res) => {
+router.get('/gettrend', async (req, res) => {
 	try {
 		const trendingStories = await TrendingStory.find()
 			.populate({
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 })
 
 // Add blog to trending stories
-router.post('/',isAuthenticated, async (req, res) => {
+router.post('/createtrend',isAuthenticated, async (req, res) => {
 	try {
 		const {blogId} = req.body
 
@@ -60,7 +60,7 @@ router.post('/',isAuthenticated, async (req, res) => {
 })
 
 // Remove blog from trending stories
-router.delete('/:blogId', isAuthenticated,async (req, res) => {
+router.delete('deletetrend/:blogId', isAuthenticated,async (req, res) => {
 	try {
 		const {blogId} = req.params
 

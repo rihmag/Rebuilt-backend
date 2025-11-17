@@ -58,7 +58,7 @@ router.post('/createstories', isAuthenticated,async (req, res) => {
 })
 
 // Remove blog from main stories
-router.delete('removefromstories/:blogId',isAuthenticated, async (req, res) => {
+router.delete('/removefromstories/:blogId',isAuthenticated, async (req, res) => {
 	try {
 		const {blogId} = req.params
 

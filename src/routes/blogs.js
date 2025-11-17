@@ -38,7 +38,7 @@ router.get('/category/:slug', async (req, res) => {
 	}
 })
 
-router.get('blogbyid/:id', async (req, res) => {
+router.get('/blogbyid/:id', async (req, res) => {
 	try {
 		const {id} = req.params
 
@@ -112,7 +112,7 @@ router.post('/createblogs',isAuthenticated, upload.single('image'), async (req, 
 	}
 })
 
-router.put('updateblog/:id', isAuthenticated, async (req, res) => {
+router.put('/updateblog/:id', isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 		const {categoryId, title, description, author, date} = req.body
@@ -181,7 +181,7 @@ router.put('updateblog/:id', isAuthenticated, async (req, res) => {
 	}
 })
 
-router.delete('deleteblog/:id',isAuthenticated, async (req, res) => {
+router.delete('/deleteblog/:id',isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 

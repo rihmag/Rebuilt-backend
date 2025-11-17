@@ -5,7 +5,7 @@ import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all news carousel items
-router.get('/', async (req, res) => {
+router.get('/getnews', async (req, res) => {
 	try {
 		const items = await NewsCarousel.find({isActive: true}).sort({createdAt: -1})
 		res.json({newsCarousel: items})
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 })
 
 // Create a new news carousel item
-router.post('/',isAuthenticated,upload.single('image'), async (req, res) => {
+router.post('/createnews',isAuthenticated,upload.single('image'), async (req, res) => {
 	try {
 		const {headline} = req.body
 
