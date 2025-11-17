@@ -6,7 +6,7 @@ import isAuthenticated from '../middleware/authmiddleware.js'
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/getblogs', async (req, res) => {
 	try {
 		const blogs = await Blog.find({isActive: true})
 			.populate('categoryId', 'name')
@@ -38,7 +38,7 @@ router.get('/category/:slug', async (req, res) => {
 	}
 })
 
-router.get('/:id', async (req, res) => {
+router.get('blogbyid/:id', async (req, res) => {
 	try {
 		const {id} = req.params
 
@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
 	}
 })
 
-router.post('/',isAuthenticated, upload.single('image'), async (req, res) => {
+router.post('/createblogs',isAuthenticated, upload.single('image'), async (req, res) => {
 	try {
 		const {categoryId, title, description, author, date} = req.body
 
@@ -112,7 +112,7 @@ router.post('/',isAuthenticated, upload.single('image'), async (req, res) => {
 	}
 })
 
-router.put('/:id', isAuthenticated,upload.single('image'), async (req, res) => {
+router.put('updateblog/:id', isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 		const {categoryId, title, description, author, date} = req.body
@@ -181,7 +181,7 @@ router.put('/:id', isAuthenticated,upload.single('image'), async (req, res) => {
 	}
 })
 
-router.delete('/:id',isAuthenticated, async (req, res) => {
+router.delete('deleteblog/:id',isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 

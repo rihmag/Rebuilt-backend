@@ -5,7 +5,7 @@ import isAuthenticated from '../middleware/authmiddleware.js'
 const router = express.Router()
 
 // Get all main stories
-router.get('/', async (req, res) => {
+router.get('/getstories', async (req, res) => {
 	try {
 		const mainStories = await MainStory.find()
 			.populate({
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 })
 
 // Add blog to main stories
-router.post('/', isAuthenticated,async (req, res) => {
+router.post('/createstories', isAuthenticated,async (req, res) => {
 	try {
 		const {blogId} = req.body
 
@@ -58,7 +58,7 @@ router.post('/', isAuthenticated,async (req, res) => {
 })
 
 // Remove blog from main stories
-router.delete('/:blogId',isAuthenticated, async (req, res) => {
+router.delete('removefromstories/:blogId',isAuthenticated, async (req, res) => {
 	try {
 		const {blogId} = req.params
 
