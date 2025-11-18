@@ -53,7 +53,7 @@ router.post('/createnews',isAuthenticated,upload.single('image'), async (req, re
 })
 
 // Delete a news carousel item
-router.delete('/:id',isAuthenticated, async (req, res) => {
+router.delete('/deletenews/:id',isAuthenticated, async (req, res) => {
 	try {
 		const {id} = req.params
 
